@@ -8,18 +8,18 @@ menu_order: 2
 github_link: get-started/authentication/gs-authentication-oauth.md
 ---
 
-<p>Third-party applications that integrate with Magento use OAuth-based authentication to access the Magento web APIs. This authentication method uses an OAuth 1.0a handshake process that exchanges a request token for an access token that enables access to Magento APIs.</p>
-<p>Magento instances can use the OAuth-based authentication process for both SOAP and REST web API calls.</p>
+<p>Third-party applications that integrate with Magento can use OAuth-based authentication to access the Magento web APIs. This authentication method uses a 2-legged OAuth 1.0a handshake process that exchanges a request token for an access token that enables access to Magento APIs.</p>
+<p>Magento instances can use the OAuth-based authentication process for REST based web API calls only. For SOAP clients, authentication is simply based on bearer token style authentication using Authorization header ex. Austhorization: Bearer <access token></p>
 <p>For details about OAuth 1.0a, see <a href="https://tools.ietf.org/html/rfc5849">The OAuth 1.0 Protocol</a>.</p>
 <p>To configure your third-party application to use OAuth-based authentication to access the Magento web APIs, read these sections:</p>
 <ul>
-<li><a href="#oauth-process">Add-on registration and OAuth-based authentication</a></li>
+<li><a href="#oauth-process">Integration registration and OAuth-based authentication</a></li>
    <li><a href="#pre-auth-token">Step 1. Get a request token</a></li>
    <li><a href="#get-access-token">Step 2. Get an access token</a></li>
    <li><a href="#web-api-access">Step 3. Access the web APIs</a></li>
 </ul>
-<h2 id="oauth-process">Add-on registration and OAuth-based authentication</h2>
-<p>As an add-on developer, you must register add-ons in the Magento system. After registration, you must get a <i>request token</i>, which is a pre-authorized token, and a token secret to authenticate the add-on to make API calls.</p>
+<h2 id="oauth-process">Integration registration and OAuth-based authentication</h2>
+<p>As an Integration developer, you must register integrations in the Magento system. After registration, you must get a <i>request token</i>, which is a pre-authorized token, and a token secret to authenticate the add-on to make API calls.</p>
 <p>You can register add-ons through Magento Connect. After successful registration, Magento Connect generates a configuration file. If you choose not to register the add-on through Magento Connect, you can manually create the configuration file and make it available to merchants.</p>
 <p>An add-on configuration file contains add-on details like the endpoint that receives credentials and the required permissions. Any metadata that is defined in the configuration file enables Magento to pass credentials to add-ons. However, you must use these credentials to get an access token in fewer than three minutes or the credentials are disabled. The use of an HTTPS endpoint to pass the credentials eliminates this risk to a certain extent. The add-on must expose an HTTPS endpoint to which a Magento instance can POST temporary credentials. Magento can then validate the SSL certificate for the server to confirm its identity.</p>
 <p>Add-ons use the passed credentials to get a request token, which is a pre-authorized token. Add-ons then use credentials plus the request token to get a long-lived access token.</p>
